@@ -118,20 +118,25 @@ post '/details/:post_id' do
 	# получаем переменную из post-запроса
 	content = params[:content]	
 
+	# получаем имя автора
+	author = params[:author]
+
 	# сохранение данных в БД
 
 	@db.execute 'insert into Comments
 		(
 			content,
 			created_date,
-			post_id
+			post_id,
+			author
 		)
 			values
 		(
 			?,
 			datetime(),
+			?,
 			?
-		)', [content, post_id]
+		)', [content, post_id, author]
 
 	# перенаправление на страницу поста
 

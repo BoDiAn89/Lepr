@@ -4,7 +4,7 @@
 	<%= @row['content'] %>
 	<br />
 	<br />
-	Added at <%= @row['created_date'] %>
+	Added by <%= @row['author'] %> at <%= @row['created_date'] %>
 </p>
 <br />
 <h4>Comments:</h4>
@@ -14,7 +14,7 @@
 		<%= comment['content'] %>
 		<br />
 		<br />
-		<span style="font-size: 75%; color: #999">Added at <%= comment['created_date'] %></span>		
+		<span style="font-size: 75%; color: #999">Added by <%= comment['author'] %> at <%= comment['created_date'] %></span>		
 	</p>
 	<hr />
 <% end %>
@@ -22,6 +22,11 @@
 <p>
 	<form action="/details/<%= @row['id'] %>" method="POST" role="form">
 		<textarea name="content" class="form-control" rows="6" placeholder="Type comment text here"></textarea>
+		<br />
+		<div class="form-group">
+		 	<label>Your name:</label>
+		    <input name= "author" type="text" class="form-control" placeholder="Enter your name">
+  		</div>		
 		<br />
 	 	<button type="submit" class="btn btn-primary">Add comment</button>
 	</form>
