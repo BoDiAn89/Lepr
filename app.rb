@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+# <<<<<<< HEAD
 require 'sinatra/reloader'
 require 'sqlite3'
 
@@ -28,7 +29,8 @@ configure do
 	(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		created_date DATE,
-		content TEXT
+		content TEXT,
+		Author
 	)'
 
 	# создает таблицу если таблица не существует
@@ -37,9 +39,12 @@ configure do
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		created_date DATE,
 		content TEXT,
+		Author,
 		post_id integer
 	)'
 end
+# =======
+# >>>>>>> parent of a1233ff... Add sinatra reloader
 
 get '/' do
 	# выбираем список постов из БД
@@ -62,9 +67,13 @@ end
 post '/new' do
 	# получаем переменную из post-запроса
 	content = params[:content]
+	author = params[:author]
 
 	if content.length <= 0
-		@error = 'Type post text'
+		@error = 'Type post text!'
+		return erb :new
+	elsif author.length <=0
+		@error = 'Enter your name!'
 		return erb :new
 	end
 
