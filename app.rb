@@ -30,7 +30,7 @@ configure do
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		created_date DATE,
 		content TEXT,
-		Author
+		author TEXT
 	)'
 
 	# создает таблицу если таблица не существует
@@ -39,7 +39,7 @@ configure do
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		created_date DATE,
 		content TEXT,
-		Author,
+		author TEXT,
 		post_id integer
 	)'
 end
@@ -79,7 +79,7 @@ post '/new' do
 
 	# сохранение данных в БД
 
-	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
+	@db.execute 'insert into Posts (content, author, created_date) values (?, ?, datetime())', [content, author]
 
 	# перенаправление на главную страницу
 
